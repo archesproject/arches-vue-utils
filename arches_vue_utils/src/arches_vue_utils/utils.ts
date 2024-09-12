@@ -1,6 +1,11 @@
 import { ALT_LABEL, PREF_LABEL } from "@/arches_vue_utils/constants.ts";
 
-import type { Label, Labellable } from "@/arches_vue_utils/types";
+import type {
+    HasLabels,
+    HasValues,
+    Label,
+    Labellable,
+} from "@/arches_vue_utils/types";
 
 /* Port of rank_label in arches.app.utils.i18n python module */
 export const rankLabel = (
@@ -9,15 +14,15 @@ export const rankLabel = (
     systemLanguageCode: string,
 ): number => {
     let rank = 1;
-    if (label.valuetype === PREF_LABEL) {
+    if (label.valuetype_id === PREF_LABEL) {
         rank = 10;
-    } else if (label.valuetype === ALT_LABEL) {
+    } else if (label.valuetype_id === ALT_LABEL) {
         rank = 4;
     }
 
     // Some arches deployments may not have standardized capitalizations.
-    const labelLanguageFull = label.languageCode.toLowerCase();
-    const labelLanguageNoRegion = label.languageCode
+    const labelLanguageFull = label.language_id.toLowerCase();
+    const labelLanguageNoRegion = label.language_id
         .split(/[-_]/)[0]
         .toLowerCase();
     const preferredLanguageFull = preferredLanguageCode.toLowerCase();
@@ -47,10 +52,11 @@ export const getItemLabel = (
     preferredLanguageCode: string,
     systemLanguageCode: string,
 ): Label => {
-    if (!item.labels.length) {
+    const labels = (item as HasLabels).labels ?? (item as HasValues).values;
+    if (!labels.length) {
         throw new Error();
     }
-    return item.labels.sort(
+    return labels.sort(
         (a, b) =>
             rankLabel(b, preferredLanguageCode, systemLanguageCode) -
             rankLabel(a, preferredLanguageCode, systemLanguageCode),

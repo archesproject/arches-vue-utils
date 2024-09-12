@@ -9,10 +9,16 @@ export interface Language {
 
 export interface Label {
     value: string;
-    languageCode: string;
-    valuetype: "prefLabel" | "altLabel" | "hiddenLabel";
+    language_id: string;
+    valuetype_id: string;
 }
 
-export interface Labellable {
+export interface HasLabels {
     labels: Label[];
 }
+
+export interface HasValues {
+    values: Label[];
+}
+
+export type Labellable = HasLabels | HasValues;

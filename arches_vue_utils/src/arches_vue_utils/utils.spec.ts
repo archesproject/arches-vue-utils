@@ -8,14 +8,11 @@ import { getItemLabel, rankLabel } from "@/arches_vue_utils/utils.ts";
 import type { Label } from "@/arches_vue_utils/types";
 
 // Test utils
-const asLabel = (
-    valuetype: "prefLabel" | "altLabel" | "hiddenLabel",
-    languageCode: string,
-): Label => {
+const asLabel = (valuetype_id: string, language_id: string): Label => {
     return {
         value: "arbitrary",
-        valuetype,
-        languageCode,
+        valuetype_id,
+        language_id,
     };
 };
 
@@ -23,12 +20,12 @@ const systemLanguageCode = "en-ZA"; // arbitrary
 
 describe("rankLabel() util", () => {
     const rank = (
-        valuetype: "prefLabel" | "altLabel" | "hiddenLabel",
+        valuetype_id: string,
         labelLanguageCode: string,
         desiredLanguageCode: string,
     ) =>
         rankLabel(
-            asLabel(valuetype, labelLanguageCode),
+            asLabel(valuetype_id, labelLanguageCode),
             desiredLanguageCode,
             systemLanguageCode,
         );
@@ -82,7 +79,7 @@ describe("getItemLabel() util", () => {
                 },
                 "fr",
                 systemLanguageCode,
-            ).languageCode,
+            ).language_id,
         ).toEqual(systemLanguageCode);
     });
 });
