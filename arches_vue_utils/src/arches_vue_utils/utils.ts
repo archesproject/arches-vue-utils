@@ -1,10 +1,10 @@
 import { ALT_LABEL, PREF_LABEL } from "@/arches_vue_utils/constants.ts";
 
 import type {
-    HasLabels,
-    HasValues,
     Label,
     Labellable,
+    WithLabels,
+    WithValues,
 } from "@/arches_vue_utils/types";
 
 /* Port of rank_label in arches.app.utils.i18n python module */
@@ -52,7 +52,7 @@ export const getItemLabel = (
     preferredLanguageCode: string,
     systemLanguageCode: string,
 ): Label => {
-    const labels = (item as HasLabels).labels ?? (item as HasValues).values;
+    const labels = (item as WithLabels).labels ?? (item as WithValues).values;
     if (!labels.length) {
         throw new Error();
     }

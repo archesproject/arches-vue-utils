@@ -13,12 +13,12 @@ export interface Label {
     valuetype_id: string;
 }
 
-export interface HasLabels {
+export interface WithLabels {
     labels: Label[];
 }
 
-export interface HasValues {
+export interface WithValues {
     values: Label[];
 }
 
-export type Labellable = HasLabels | HasValues;
+export type Labellable = WithLabels | WithValues;
