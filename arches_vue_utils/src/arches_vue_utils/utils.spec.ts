@@ -8,13 +8,13 @@ import { getItemLabel, rankLabel } from "@/arches_vue_utils/utils.ts";
 import type { Label } from "@/arches_vue_utils/types";
 
 // Test utils
-const asLabel = (valuetype_id: string, language_id: string): Label => {
+function asLabel(valuetype_id: string, language_id: string): Label {
     return {
         value: "arbitrary",
         valuetype_id,
         language_id,
     };
-};
+}
 
 const systemLanguageCode = "en-ZA"; // arbitrary
 
@@ -63,6 +63,13 @@ describe("getItemLabel() util", () => {
         expect(() =>
             getItemLabel(
                 { labels: [] },
+                systemLanguageCode,
+                systemLanguageCode,
+            ),
+        ).toThrow();
+        expect(() =>
+            getItemLabel(
+                { values: [] },
                 systemLanguageCode,
                 systemLanguageCode,
             ),
