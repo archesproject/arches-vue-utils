@@ -22,3 +22,10 @@ export interface WithValues {
 }
 
 export type Labellable = WithLabels | WithValues;
+
+export interface Descriptors {
+    [key: string]: {
+        name: string;
+        description: string;
+    };
+}
