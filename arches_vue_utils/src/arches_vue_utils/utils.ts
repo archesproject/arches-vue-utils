@@ -54,7 +54,11 @@ export const getItemLabel = (
 ): Label => {
     const labels = (item as WithLabels).labels ?? (item as WithValues).values;
     if (!labels.length) {
-        throw new Error();
+        return {
+            value: "",
+            language_id: "",
+            valuetype_id: "",
+        };
     }
     return labels.sort(
         (a, b) =>
