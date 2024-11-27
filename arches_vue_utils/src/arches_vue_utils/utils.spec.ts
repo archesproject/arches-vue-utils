@@ -17,6 +17,11 @@ function asLabel(valuetype_id: string, language_id: string): Label {
 }
 
 const systemLanguageCode = "en-ZA"; // arbitrary
+const emptyLabel = {
+    value: "",
+    language_id: "",
+    valuetype_id: "",
+};
 
 describe("rankLabel() util", () => {
     const rank = (
@@ -59,21 +64,21 @@ describe("rankLabel() util", () => {
 });
 
 describe("getItemLabel() util", () => {
-    it("Errors if no labels", () => {
-        expect(() =>
+    it("Returns empty label if no labels to search", () => {
+        expect(
             getItemLabel(
                 { labels: [] },
                 systemLanguageCode,
                 systemLanguageCode,
             ),
-        ).toThrow();
-        expect(() =>
+        ).toEqual(emptyLabel);
+        expect(
             getItemLabel(
                 { values: [] },
                 systemLanguageCode,
                 systemLanguageCode,
             ),
-        ).toThrow();
+        ).toEqual(emptyLabel);
     });
     it("Falls back to system language", () => {
         expect(
