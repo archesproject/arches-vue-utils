@@ -73,7 +73,7 @@ export const getDescriptors = (
         systemLanguageCode: string,
     ): [string, string] => {
     if (!data) {
-        return ["None", "None"];
+        return ["", ""];
     }
     const descriptors = data[systemLanguageCode];
     return [descriptors.name, descriptors.description];
