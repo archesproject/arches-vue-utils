@@ -71,10 +71,16 @@ export const getItemLabel = (
 export const getDescriptors = (
         data: Descriptors,
         systemLanguageCode: string,
-    ): [string, string] => {
+    ): Descriptors => {
     if (!data) {
-        return ["", ""];
+        return {
+            name: "",
+            description: "",
+        };
     }
-    const descriptors = data[systemLanguageCode];
-    return [descriptors.name, descriptors.description];
+    const descriptors = data[systemLanguageCode] ?? data[Object.keys(data)[0]];
+    return {
+        name: descriptors.name ?? "",
+        description: descriptors.description ?? "",
+    };
 };
