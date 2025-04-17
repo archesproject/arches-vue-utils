@@ -1,6 +1,7 @@
 import { ALT_LABEL, PREF_LABEL } from "@/arches_vue_utils/constants.ts";
 
 import type {
+    Descriptors,
     Label,
     Labellable,
     WithLabels,
@@ -65,4 +66,21 @@ export const getItemLabel = (
             rankLabel(b, preferredLanguageCode, systemLanguageCode) -
             rankLabel(a, preferredLanguageCode, systemLanguageCode),
     )[0];
+};
+
+export const getDescriptors = (
+        data: Descriptors,
+        systemLanguageCode: string,
+    ): Descriptors => {
+    if (!data) {
+        return {
+            name: "",
+            description: "",
+        };
+    }
+    const descriptors = data[systemLanguageCode] ?? data[Object.keys(data)[0]];
+    return {
+        name: descriptors.name ?? "",
+        description: descriptors.description ?? "",
+    };
 };
