@@ -1,5 +1,6 @@
-# arches-vue-utils
-Vue components and utilities for Arches applications
+# arches-vue-utils (ARCHIVED)
+Vue components and utilities for Arches applications.
+This functionality was merged to arches-component-lab
 
 # Installation
 - `pip install arches-vue-utils`
